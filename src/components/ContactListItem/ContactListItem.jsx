@@ -4,6 +4,7 @@ import { DelBtn, ListItem } from './ContactListItem.styled';
 
 export const ContactListItem = ({ contacts, filter, delContact }) => {
   const normalizedFilter = filter.toLowerCase().trim();
+
   const filteredContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(normalizedFilter)
   );
