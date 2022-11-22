@@ -1,8 +1,16 @@
-import { ImUserMinus } from 'react-icons/im';
-import PropTypes from 'prop-types';
 import { DelBtn, ListItem } from './ContactListItem.styled';
+import { ImUserMinus } from 'react-icons/im';
 
-export const ContactListItem = ({ contacts, filter, delContact }) => {
+import { useSelector, useDispatch } from 'react-redux';
+import { getContacts, getFilter } from 'redux/selectors';
+import { deleteContact } from '../../redux/contactsSlice';
+
+export const ContactListItem = () => {
+  const dispatch = useDispatch();
+
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
+
   const normalizedFilter = filter.toLowerCase().trim();
 
   const filteredContacts = contacts.filter(contact =>
@@ -12,24 +20,12 @@ export const ContactListItem = ({ contacts, filter, delContact }) => {
     <>
       {filteredContacts.map(({ name, id, number }) => (
         <ListItem key={id}>
-          {name}: {number}{' '}
-          <DelBtn type="button" onClick={() => delContact(id)}>
+          {name}: {number}
+          <DelBtn type="button" onClick={() => dispatch(deleteContact(id))}>
             <ImUserMinus />
           </DelBtn>
         </ListItem>
       ))}
     </>
   );
-};
-
-ContactListItem.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-  filter: PropTypes.string.isRequired,
-  delContact: PropTypes.func.isRequired,
 };
