@@ -10,7 +10,7 @@ export const ContactListItem = () => {
 
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
-
+  console.log(contacts);
   const normalizedFilter = filter.toLowerCase().trim();
 
   const filteredContacts = contacts.filter(contact =>
