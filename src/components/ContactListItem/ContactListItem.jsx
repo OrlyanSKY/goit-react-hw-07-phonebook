@@ -3,15 +3,16 @@ import { ImUserMinus } from 'react-icons/im';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { getContacts, getFilter } from 'redux/selectors';
-import { deleteContact } from '../../redux/contactsSlice';
+import { deleteContact } from 'redux/contactsSlice';
 
 export const ContactListItem = () => {
   const dispatch = useDispatch();
 
   const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
-  console.log(contacts);
-  const normalizedFilter = filter.toLowerCase().trim();
+
+  const filterValue = useSelector(getFilter);
+
+  const normalizedFilter = filterValue.toLowerCase().trim();
 
   const filteredContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(normalizedFilter)
