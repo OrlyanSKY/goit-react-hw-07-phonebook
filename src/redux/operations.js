@@ -6,7 +6,7 @@ axios.defaults.baseURL = 'https://637fe7848efcfcedacf9b0a3.mockapi.io/api/v1/';
 // All contacts
 
 export const fetchContacts = createAsyncThunk(
-  'contacts/fetchContacts',
+  'contacts/fetchAll',
   async (_, { rejectWithValue }) => {
     try {
       const contacts = await axios.get('/contacts');
@@ -39,7 +39,7 @@ export const addContact = createAsyncThunk(
 // Delete contact
 
 export const deleteContact = createAsyncThunk(
-  'contacts/deleteContacts',
+  'contacts/deleteContact',
   async (id, { rejectWithValue }) => {
     try {
       const delContact = await axios.delete(`/contacts/${id}`);
