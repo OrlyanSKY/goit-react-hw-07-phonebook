@@ -8,6 +8,7 @@ import { Text } from './ContactForm/ContactForm.styled';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
+import {} from 'redux/selectors';
 
 export const App = () => {
   const dispatch = useDispatch();
