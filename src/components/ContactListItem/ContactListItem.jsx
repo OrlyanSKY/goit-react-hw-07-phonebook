@@ -2,26 +2,18 @@ import { DelBtn, ListItem } from './ContactListItem.styled';
 import { ImUserMinus } from 'react-icons/im';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { getContacts, getFilter } from 'redux/selectors';
-import { deleteContact } from 'redux/contactsSlice';
+import { selectVisibleContacts } from 'redux/selectors';
+import { deleteContact } from 'redux/operations';
 
 export const ContactListItem = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(selectVisibleContacts);
 
-  const contacts = useSelector(getContacts);
-
-  const filterValue = useSelector(getFilter);
-
-  const normalizedFilter = filterValue.toLowerCase().trim();
-
-  const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(normalizedFilter)
-  );
   return (
     <>
-      {filteredContacts.map(({ name, id, number }) => (
+      {contacts.map(({ name, id, phone }) => (
         <ListItem key={id}>
-          {name}: {number}
+          {name}: {phone}
           <DelBtn type="button" onClick={() => dispatch(deleteContact(id))}>
             <ImUserMinus />
           </DelBtn>
